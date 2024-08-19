@@ -1,4 +1,4 @@
-package com.reactapp-pdfjs;
+package com.reactapp.pdfjs;
 
 import android.app.Application;
 

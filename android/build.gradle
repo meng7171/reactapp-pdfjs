@@ -4,41 +4,56 @@ buildscript {
     ext {
         buildToolsVersion = "29.0.2"
         minSdkVersion = 21
-        compileSdkVersion = 31      //https://support.google.com/googleplay/android-developer/answer/11926878
-        targetSdkVersion = 31       
-        supportLibVersion = "28.0.0"
-        firebaseMessagingVersion = "21.1.0"
+        compileSdkVersion = 31
+        targetSdkVersion = 31
     }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0'
-
+        classpath('com.android.tools.build:gradle:4.0.0')
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
-def REACT_NATIVE_VERSION = new File(['node', '--print',"JSON.parse(require('fs').readFileSync(require.resolve('react-native/package.json'), 'utf-8')).version"].execute(null, rootDir).text.trim())
-
 allprojects {
     repositories {
+
+        // https://cloud.tencent.com/developer/ask/sof/107424263
+         exclusiveContent {
+        // We get React Native's Android binaries exclusively through npm,
+        // from a local Maven repo inside node_modules/react-native/.
+        // (The use of exclusiveContent prevents looking elsewhere like Maven Central
+        // and potentially getting a wrong version.)
+        filter {
+            includeGroup "com.facebook.react"
+        }
+        forRepository {
+            maven {
+                url "$rootDir/../node_modules/react-native/android"
+            }
+        }
+        }
+
+
         mavenLocal()
-        google()
-        jcenter()
+        mavenCentral()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url "$rootDir/../node_modules/react-native/android"
+            url("$rootDir/../node_modules/react-native/android")
         }
-    }
-    configurations.all {
-        resolutionStrategy {
-            // Remove this override in 0.65+, as a proper fix is included in react-native itself.
-            force "com.facebook.react:react-native:" + REACT_NATIVE_VERSION
+        maven {
+            // Android JSC is installed from npm
+            url("$rootDir/../node_modules/jsc-android/dist")
         }
+
+        google()
+        jcenter()
+        maven { url 'https://www.jitpack.io' }
+
+        // ADD THIS
+        maven { url 'https://maven.google.com' }
     }
 }
-
-

@@ -2,7 +2,7 @@
 ## React Native Application
 
 ## TODO
-
+* [240903]: Android Crash at app initial (OK ./gradlew build but App keep stopping in Device)
 
 
 ## NOTE: this copy using tools (TBD)

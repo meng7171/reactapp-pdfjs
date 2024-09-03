@@ -3,21 +3,28 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "react": "16.9.0",
-    "react-native": "0.61.3",
-    "react-native-pdf": "5.0.11",
-    "rn-fetch-blob": "^0.12.0",
-    "rn-pdf-generator": "1.6.1"
+    "base-64": "0.1.0",
+    "crypto-js": "4.2.0",
+    "deprecated-react-native-prop-types": "5.0.0",
+    "glob": "7.2.3",
+    "@react-native/normalize-colors": "0.73.2",
+    "react": "16.11.0",
+    "react-native": "0.62.2",
+    "react-native-blob-util": "0.19.11",
+    "react-native-pdf": "6.7.5"
   },
   "devDependencies": {
-    "babel-jest": "23.6.0",
-    "jest": "23.6.0",
-    "metro-react-native-babel-preset": "^0.66.2",
-    "react-test-renderer": "16.6.3"
+    "babel-jest": "24.9.0",
+    "jest": "24.9.0",
+    "metro-react-native-babel-preset": "0.59.0",
+    "react-test-renderer": "16.11.0"
   },
   "jest": {
     "preset": "react-native"
